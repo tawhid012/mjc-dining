@@ -85,7 +85,7 @@ CREATE TABLE settings (
     banner_url TEXT,
     is_banner_active BOOLEAN DEFAULT true,
     whatsapp_number TEXT DEFAULT '919876543210',
-    address TEXT DEFAULT 'Station Road, Hailakandi, Assam',
+    address TEXT DEFAULT 'Mission Road, Front of DT Office, Hailakandi, Assam, India',
     opening_hours TEXT DEFAULT 'Mon-Sun: 10 AM - 10 PM',
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())
 );
@@ -188,7 +188,7 @@ CREATE POLICY "Allow authenticated full access" ON homepage_content FOR ALL USIN
 -- ==========================================
 
 INSERT INTO settings (banner_url, is_banner_active, whatsapp_number, address, opening_hours)
-VALUES ('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop', true, '919876543210', 'Station Road, Hailakandi, Assam', 'Mon-Sun: 10 AM - 10 PM');
+VALUES ('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop', true, '919876543210', 'Mission Road, Front of DT Office, Hailakandi, Assam, India', 'Mon-Sun: 10 AM - 10 PM');
 
 INSERT INTO categories (name, slug, icon, sort_order) VALUES
 ('Fresh Juices', 'juice', 'fa-solid fa-glass-water', 1),
