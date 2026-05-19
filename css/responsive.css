@@ -1,0 +1,61 @@
+/* Responsive Adjustments */
+
+/* Tablet & Up */
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 0; /* Remove bottom padding on desktop */
+  }
+
+  .bottom-nav {
+    display: none; /* Hide bottom nav on desktop */
+  }
+
+  .desktop-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .desktop-nav a {
+    font-weight: 500;
+    color: var(--text-main);
+    transition: var(--transition-fast);
+  }
+
+  .desktop-nav a:hover {
+    color: var(--primary-color);
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .hygiene-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .hygiene-text {
+    text-align: left;
+    flex: 1;
+  }
+
+  .hygiene-features {
+    flex: 1;
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1024px) {
+  .food-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

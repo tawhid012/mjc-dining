@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mariam Juice Cafe & Dining | Premium Dining & Delivery in Hailakandi</title>
+    <meta name="description" content="Experience premium dining, fresh juices, and the best food in Hailakandi. Order online or book a table for family gatherings and birthday parties at Mariam Juice Cafe & Dining.">
+    <meta name="keywords" content="best cafe in Hailakandi, juice cafe in Hailakandi, birthday party cafe in Hailakandi, family dining in Hailakandi, MJC">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+</head>
+<body>
+    <!-- Global Loader -->
+    <div id="page-loader" class="page-loader"><div class="loader-spinner"></div></div>
+
+    <!-- Promo Banner Modal -->
+    <div class="promo-overlay" id="promo-overlay" onclick="closePromo()">
+        <div class="promo-modal" onclick="event.stopPropagation()">
+            <button class="promo-close" onclick="closePromo()"><i class="fa-solid fa-xmark"></i></button>
+            <img src="" id="promo-image" alt="Special Offer">
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="Image.jpg" alt="MJC Logo" class="brand-logo">
+                MJC<span>.</span>
+            </a>
+            <nav class="desktop-nav">
+                <a href="index.html" style="color: var(--primary-color);">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="offers.html">Offers</a>
+                <a href="booking.html">Book Table</a>
+                <a href="gallery.html">Gallery</a>
+                <button class="btn btn-primary" onclick="toggleCart()"><i class="fa-solid fa-bag-shopping"></i> Cart (0)</button>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Menu" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. PREMIUM HERO SECTION -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content animate-fade-in" id="dynamic-hero-container">
+                    <span style="display:inline-block; background:rgba(166,138,100,0.2); color:var(--primary-color); padding:0.4rem 1rem; border-radius:30px; font-weight:600; font-size:0.85rem; letter-spacing:1px; margin-bottom:1rem; text-transform:uppercase; border:1px solid rgba(166,138,100,0.3);">Best In Town</span>
+                    <h1 style="font-size: 2.8rem; font-weight: 700;">A Taste of Luxury in Hailakandi</h1>
+                    <p style="font-size: 1.1rem;">Experience premium dining, artisanal coffee, and fresh cold-pressed juices crafted to perfection.</p>
+                    <div class="hero-cta">
+                        <a href="menu.html" class="btn btn-primary"><i class="fa-solid fa-utensils mr-2"></i> Order Now</a>
+                        <a href="booking.html" class="btn btn-outline"><i class="fa-regular fa-calendar mr-2"></i> Book Dining</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. TRUST BAR -->
+        <section class="trust-bar animate-fade-in delay-100">
+            <div class="trust-item"><i class="fa-solid fa-leaf"></i> Fresh Ingredients</div>
+            <div class="trust-item"><i class="fa-solid fa-hands-bubbles"></i> Hygienic Kitchen</div>
+            <div class="trust-item"><i class="fa-solid fa-users"></i> Family Dining</div>
+            <div class="trust-item"><i class="fa-solid fa-motorcycle"></i> Fast Delivery</div>
+            <div class="trust-item"><i class="fa-solid fa-champagne-glasses"></i> Event Booking</div>
+            <div class="trust-item"><i class="fa-solid fa-star"></i> Premium Experience</div>
+        </section>
+
+        <!-- 3. QUICK CATEGORY NAVIGATION -->
+        <section class="categories container animate-fade-in delay-200">
+            <div class="category-scroll">
+                <div class="category-item" onclick="window.location.href='menu.html?cat=juice'">
+                    <div class="category-icon"><i class="fa-solid fa-glass-water"></i></div>
+                    <span>Fresh Juice</span>
+                </div>
+                <div class="category-item" onclick="window.location.href='menu.html?cat=shakes'">
+                    <div class="category-icon"><i class="fa-solid fa-blender"></i></div>
+                    <span>Shakes</span>
+                </div>
+                <div class="category-item" onclick="window.location.href='menu.html?cat=coffee'">
+                    <div class="category-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                    <span>Coffee</span>
+                </div>
+                <div class="category-item" onclick="window.location.href='menu.html?cat=fastfood'">
+                    <div class="category-icon"><i class="fa-solid fa-burger"></i></div>
+                    <span>Fast Food</span>
+                </div>
+                <div class="category-item" onclick="window.location.href='menu.html?cat=chinese'">
+                    <div class="category-icon"><i class="fa-solid fa-bowl-rice"></i></div>
+                    <span>Chinese</span>
+                </div>
+                <div class="category-item" onclick="window.location.href='menu.html?cat=dining'">
+                    <div class="category-icon"><i class="fa-solid fa-cake-candles"></i></div>
+                    <span>Party Deals</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. FEATURED BEST SELLERS -->
+        <section class="container mb-4">
+            <h2 class="section-title">Most Ordered</h2>
+            <span class="section-subtitle">What Hailakandi is loving right now</span>
+            
+            <div class="food-grid" id="dynamic-bestsellers-container">
+                <!-- Bestsellers injected via JS -->
+                <div class="skeleton" style="height: 250px; border-radius: 16px;"></div>
+                <div class="skeleton" style="height: 250px; border-radius: 16px;"></div>
+                <div class="skeleton" style="height: 250px; border-radius: 16px;"></div>
+            </div>
+            
+            <div class="text-center mt-3" style="margin-top: 2rem;">
+                <a href="menu.html" class="btn btn-outline">Explore Full Menu</a>
+            </div>
+        </section>
+
+        <!-- DYNAMIC OFFERS SECTION -->
+        <section class="container mb-4" style="padding-bottom: 2rem;">
+            <h2 class="section-title">Special Offers</h2>
+            <span class="section-subtitle">Grab them before they're gone</span>
+            <div id="dynamic-offers-container" style="display: flex; gap: 1.5rem; overflow-x: auto; padding: 1rem 5px; scrollbar-width: none; scroll-snap-type: x mandatory;">
+                <!-- Offers injected via JS -->
+            </div>
+        </section>
+
+        <!-- 5. WHY CHOOSE MARIAM JUICE CAFE -->
+        <section class="container mb-4" style="padding-top: 3rem; padding-bottom: 3rem;">
+            <h2 class="section-title">The MJC Standard</h2>
+            <span class="section-subtitle">Why we are Hailakandi's favorite</span>
+            
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-medal"></i></div>
+                    <h3 class="why-title">Premium Quality</h3>
+                    <p class="why-desc">We never compromise. From coffee beans to fresh farm produce, only the best makes it to your table.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-heart"></i></div>
+                    <h3 class="why-title">Family Friendly</h3>
+                    <p class="why-desc">A safe, airy, and beautiful environment perfect for families, couples, and friends to connect.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <h3 class="why-title">Affordable Luxury</h3>
+                    <p class="why-desc">Experience 5-star cafe aesthetics and taste without the premium price tag.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. SIGNATURE SPECIALS SECTION -->
+        <section class="container mb-4" style="padding-bottom: 2rem;">
+            <h2 class="section-title">Chef's Signatures</h2>
+            <span class="section-subtitle">Exquisite dishes you won't find anywhere else</span>
+
+            <div class="signature-card hover-lift">
+                <img src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b?q=80&w=800&auto=format&fit=crop" alt="Signature Pizza" class="signature-img" loading="lazy">
+                <div class="signature-content">
+                    <span class="signature-badge">Must Try</span>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">The MJC Royal Pizza</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.8;">Our signature hand-tossed crust, topped with a secret blend of three cheeses, fresh bell peppers, grilled chicken, and our house-made zesty tomato sauce. Baked to perfection.</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">₹299</span>
+                        <button class="btn btn-primary" onclick="addToCart(10, 'The MJC Royal Pizza', 299)">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. DINING EXPERIENCE SHOWCASE -->
+        <section class="container mb-4" style="padding-bottom: 3rem;">
+            <h2 class="section-title">A Space for Every Occasion</h2>
+            <span class="section-subtitle">Create memories in our beautifully designed spaces</span>
+            
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=800&auto=format&fit=crop" alt="Fine Dining" loading="lazy">
+                    <div class="experience-overlay">
+                        <h3 class="experience-title">Intimate Dining</h3>
+                        <p class="experience-desc">Cozy seating, soft lighting, and an ambiance perfect for conversations and dates.</p>
+                        <a href="booking.html" class="btn btn-outline" style="border-color: white; color: white; padding: 0.5rem 1rem; font-size: 0.85rem;">Reserve Table</a>
+                    </div>
+                </div>
+                <div class="experience-card">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8892437190?q=80&w=800&auto=format&fit=crop" alt="Events" loading="lazy">
+                    <div class="experience-overlay">
+                        <h3 class="experience-title">Celebrations</h3>
+                        <p class="experience-desc">Spacious arrangements for birthdays, anniversaries, and large group meetups.</p>
+                        <a href="booking.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Book Event</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. HYGIENE & SAFETY SECTION -->
+        <section class="hygiene-section">
+            <div class="container hygiene-content">
+                <div class="hygiene-text">
+                    <h2 class="section-title" style="text-align: left;">Uncompromising Hygiene</h2>
+                    <p style="color: var(--text-light);">We maintain strict global standards of cleanliness. From our open kitchen protocols to daily sanitization, your health is our top priority.</p>
+                    <div class="hygiene-features">
+                        <div class="hygiene-feature">
+                            <i class="fa-solid fa-hands-bubbles hygiene-icon"></i>
+                            <p>Sanitized Staff</p>
+                        </div>
+                        <div class="hygiene-feature">
+                            <i class="fa-solid fa-temperature-arrow-up hygiene-icon"></i>
+                            <p>Temp Checks</p>
+                        </div>
+                        <div class="hygiene-feature">
+                            <i class="fa-solid fa-spray-can-sparkles hygiene-icon"></i>
+                            <p>Clean Kitchen</p>
+                        </div>
+                        <div class="hygiene-feature">
+                            <i class="fa-solid fa-box-open hygiene-icon"></i>
+                            <p>Safe Packing</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="flex: 1; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg);">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=800&auto=format&fit=crop" alt="Clean Kitchen" loading="lazy" style="width: 100%; height: 350px; object-fit: cover;">
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. BIRTHDAY & EVENT BOOKING SECTION -->
+        <section class="container" style="padding: 5rem 20px;">
+            <div style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); border-radius: 30px; padding: 3rem 2rem; color: white; text-align: center; box-shadow: var(--shadow-lg);">
+                <i class="fa-solid fa-cake-candles" style="font-size: 3rem; margin-bottom: 1rem; color: #FFF;"></i>
+                <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Make Your Birthday Special</h2>
+                <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.9;">We offer exclusive birthday packages including customized decorations, dedicated serving staff, and premium menu combinations.</p>
+                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <div style="background: rgba(0,0,0,0.2); padding: 1rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 1.5rem; font-weight: 700;">10+</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">Guests</div>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.2); padding: 1rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 1.5rem; font-weight: 700;">Free</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">Decoration</div>
+                    </div>
+                </div>
+                <a href="booking.html" class="btn" style="background: white; color: var(--primary-dark); margin-top: 2rem; padding: 1rem 2rem; font-weight: 600;">View Packages & Book</a>
+            </div>
+        </section>
+
+        <!-- 13. CUSTOMER TESTIMONIALS -->
+        <section class="container mb-4" style="padding-top: 2rem;">
+            <h2 class="section-title">What They Say</h2>
+            <span class="section-subtitle">Real reviews from our lovely customers</span>
+            
+            <div class="testimonial-scroll" id="dynamic-testimonials-container">
+                <!-- Testimonials injected via JS -->
+            </div>
+        </section>
+
+        <!-- 14. INSTAGRAM / REELS INSPIRED SECTION -->
+        <section class="container mb-4" style="padding-top: 3rem;">
+            <h2 class="section-title">Follow The Vibe</h2>
+            <span class="section-subtitle">Catch us on Instagram @mariamjuicecafe</span>
+            
+            <div class="reels-scroll" id="dynamic-reels-container">
+                <!-- Reels injected via JS -->
+            </div>
+        </section>
+
+        <!-- 15. FAQ SECTION -->
+        <section class="container mb-4" style="padding-top: 3rem; padding-bottom: 3rem;">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <span class="section-subtitle">Got questions? We've got answers.</span>
+            
+            <div class="faq-container" id="dynamic-faq-container">
+                <!-- FAQs injected via JS -->
+            </div>
+        </section>
+
+        <!-- GOOGLE MAPS LOCATION SECTION -->
+        <section class="container mb-4" style="padding-top: 3rem; padding-bottom: 3rem;">
+            <h2 class="section-title">Find Us</h2>
+            <span class="section-subtitle">We are located in the heart of the city</span>
+            <div style="border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: 400px; width: 100%;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14486.279815033486!2d92.5539708!3d24.6816568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374e2d3bb7e5c947%3A0xc6e4b9be5ea42a17!2sHailakandi%2C%20Assam!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 16 & 17. PREMIUM FOOTER WITH MAPS -->
+    <footer>
+        <div class="container">
+            <div class="footer-content" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                
+                <!-- Brand & Newsletter -->
+                <div class="footer-brand">
+                    <a href="index.html" class="logo"><img src="Image.jpg" alt="MJC Logo" class="brand-logo"> MJC<span>.</span></a>
+                    <span style="display:block; font-size:0.8rem; color:var(--primary-color); font-weight:600; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:1rem; margin-top:-0.5rem;">Best In Town</span>
+                    <p style="margin-bottom: 1.5rem;">The finest luxury dining, refreshing beverages, and memorable experiences in Hailakandi.</p>
+                    
+                    <div class="footer-newsletter">
+                        <h4 style="margin-bottom: 10px; font-size: 0.95rem;">Join the MJC Club</h4>
+                        <input type="email" placeholder="Your Email Address">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="menu.html">Full Menu</a></li>
+                        <li><a href="offers.html">Latest Offers</a></li>
+                        <li><a href="booking.html">Reserve a Table</a></li>
+                        <li><a href="gallery.html">Photo Gallery</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-links">
+                    <h4>Visit Us</h4>
+                    <ul style="color: var(--text-light); line-height: 2;">
+                        <li><i class="fa-solid fa-location-dot" style="width: 20px; color: var(--primary-color);"></i> Station Road, Hailakandi, Assam</li>
+                        <li><i class="fa-solid fa-phone" style="width: 20px; color: var(--primary-color);"></i> +91 98765 43210</li>
+                        <li><i class="fa-solid fa-clock" style="width: 20px; color: var(--primary-color);"></i> Mon-Sun: 10 AM - 10 PM</li>
+                    </ul>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" aria-label="Facebook" style="font-size: 1.5rem; color: var(--text-main); transition: color 0.2s;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram" style="font-size: 1.5rem; color: var(--text-main); transition: color 0.2s;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/919876543210" target="_blank" aria-label="WhatsApp" style="font-size: 1.5rem; color: var(--text-main); transition: color 0.2s;"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mariam Juice Cafe & Dining. All rights reserved. | Built with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-house nav-icon"></i>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="menu.html" class="nav-item">
+            <i class="fa-solid fa-utensils nav-icon"></i>
+            <span class="nav-label">Menu</span>
+        </a>
+        <a href="booking.html" class="nav-item">
+            <i class="fa-regular fa-calendar-check nav-icon"></i>
+            <span class="nav-label">Book</span>
+        </a>
+        <a href="#" class="nav-item" onclick="toggleCart(); return false;">
+            <i class="fa-solid fa-bag-shopping nav-icon"></i>
+            <span class="nav-label">Cart</span>
+        </a>
+    </nav>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210" class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Cart Overlay & Drawer -->
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button onclick="toggleCart()" style="font-size: 1.2rem; color: var(--text-light); border:none; background:none; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container"></div>
+        <div class="cart-footer">
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-name" class="form-control" placeholder="Your Name *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-phone" class="form-control" placeholder="Contact Number *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <textarea id="cart-address" class="form-control" placeholder="Delivery Address *" required style="padding: 0.6rem 1rem; font-size: 0.9rem; min-height: 60px;"></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <input type="text" id="cart-coupon" class="form-control" placeholder="Coupon Code (Optional)" style="padding: 0.6rem 1rem; font-size: 0.9rem; border: 1px dashed var(--primary-color);">
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 600; font-size: 1.1rem;">
+                <span>Total:</span>
+                <span id="cart-total-price">₹0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; border:none; cursor:pointer;" onclick="checkoutViaWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem; color:var(--primary-color);">MJC.</h2>
+            <button onclick="toggleMobileMenu()" style="font-size:1.5rem; color:var(--text-main);"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="offers.html">Offers</a>
+        <a href="booking.html">Book Table</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cart.js?v=3"></script>
+    <script>
+        // FAQ Accordion Logic for Homepage
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const questionBtn = item.querySelector('.faq-question');
+                questionBtn.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all
+                    faqItems.forEach(faq => faq.classList.remove('active'));
+                    
+                    // Toggle current
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

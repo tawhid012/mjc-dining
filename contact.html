@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contact Us | Mariam Juice Cafe & Dining</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .contact-hero { padding: 120px 0 40px; text-align: center; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        @media (min-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .contact-info-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            background: rgba(166, 138, 100, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="Image.jpg" alt="MJC Logo" class="brand-logo"> MJC<span>.</span></a>
+            <nav class="desktop-nav">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="booking.html">Book Table</a>
+                <a href="contact.html" style="color: var(--primary-color);">Contact</a>
+                <button class="btn btn-primary" onclick="toggleCart()"><i class="fa-solid fa-bag-shopping"></i> Cart (0)</button>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Menu" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="contact-hero">
+            <h1 class="section-title">Get In Touch</h1>
+            <p class="section-subtitle">We'd love to hear from you</p>
+        </section>
+
+        <section class="contact-grid">
+            <div>
+                <div class="contact-info-card" style="margin-bottom: 1.5rem;">
+                    <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Location</h3>
+                        <p style="color: var(--text-light);">Station Road, Near Town Hall, Hailakandi, Assam, India - 788151</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-card" style="margin-bottom: 1.5rem;">
+                    <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Phone</h3>
+                        <p style="color: var(--text-light); margin-bottom: 10px;">+91 98765 43210</p>
+                        <a href="tel:+919876543210" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-phone"></i> Call Now</a>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">WhatsApp</h3>
+                        <p style="color: var(--text-light); margin-bottom: 10px;">Chat with us for fast orders</p>
+                        <a href="https://wa.me/919876543210" target="_blank" class="btn" style="background: #25D366; color: white; padding: 0.5rem 1rem; font-size: 0.85rem;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: 100%; min-height: 400px;">
+                <!-- Placeholder for Google Maps iframe -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14486.279815033486!2d92.5539708!3d24.6816568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374e2d3bb7e5c947%3A0xc6e4b9be5ea42a17!2sHailakandi%2C%20Assam!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Nav & Scripts -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house nav-icon"></i><span class="nav-label">Home</span></a>
+        <a href="menu.html" class="nav-item"><i class="fa-solid fa-utensils nav-icon"></i><span class="nav-label">Menu</span></a>
+        <a href="contact.html" class="nav-item active"><i class="fa-solid fa-phone nav-icon"></i><span class="nav-label">Contact</span></a>
+        <a href="#" class="nav-item" onclick="toggleCart(); return false;"><i class="fa-solid fa-bag-shopping nav-icon"></i><span class="nav-label">Cart</span></a>
+    </nav>
+    
+    <!-- Cart Overlay & Drawer -->
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <!-- ... same structure ... -->
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button onclick="toggleCart()" style="font-size: 1.2rem; color: var(--text-light);"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container"></div>
+        <div class="cart-footer">
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-name" class="form-control" placeholder="Your Name *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-phone" class="form-control" placeholder="Contact Number *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <textarea id="cart-address" class="form-control" placeholder="Delivery Address *" required style="padding: 0.6rem 1rem; font-size: 0.9rem; min-height: 60px;"></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <input type="text" id="cart-coupon" class="form-control" placeholder="Coupon Code (Optional)" style="padding: 0.6rem 1rem; font-size: 0.9rem; border: 1px dashed var(--primary-color);">
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 600; font-size: 1.1rem;">
+                <span>Total:</span>
+                <span id="cart-total-price">₹0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; border:none; cursor:pointer;" onclick="checkoutViaWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem; color:var(--primary-color);">MJC.</h2>
+            <button onclick="toggleMobileMenu()" style="font-size:1.5rem; color:var(--text-main);"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="offers.html">Offers</a>
+        <a href="booking.html">Book Table</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/cart.js?v=3"></script>
+</body>
+</html>

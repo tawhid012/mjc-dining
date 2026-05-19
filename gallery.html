@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gallery | Mariam Juice Cafe & Dining</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gallery-header { padding: 120px 0 40px; text-align: center; }
+        
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+            padding: 0 20px 4rem;
+        }
+        
+        @media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .masonry-item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+        
+        .masonry-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .masonry-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 1rem 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .masonry-item:hover .masonry-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="Image.jpg" alt="MJC Logo" class="brand-logo"> MJC<span>.</span></a>
+            <nav class="desktop-nav">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="booking.html">Book Table</a>
+                <a href="gallery.html" style="color: var(--primary-color);">Gallery</a>
+                <button class="btn btn-primary" onclick="toggleCart()"><i class="fa-solid fa-bag-shopping"></i> Cart (0)</button>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Menu" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <section class="gallery-header">
+            <h1 class="section-title">Our Moments</h1>
+            <p class="section-subtitle">Catch a glimpse of the MJC experience</p>
+        </section>
+
+        <section class="container" style="padding: 0;">
+            <div class="masonry-grid" id="dynamic-gallery-container">
+                <!-- Loaded dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Nav & Cart drawer ... -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house nav-icon"></i><span class="nav-label">Home</span></a>
+        <a href="menu.html" class="nav-item"><i class="fa-solid fa-utensils nav-icon"></i><span class="nav-label">Menu</span></a>
+        <a href="gallery.html" class="nav-item active"><i class="fa-solid fa-image nav-icon"></i><span class="nav-label">Gallery</span></a>
+        <a href="#" class="nav-item" onclick="toggleCart(); return false;"><i class="fa-solid fa-bag-shopping nav-icon"></i><span class="nav-label">Cart</span></a>
+    </nav>
+    
+    <!-- Cart Overlay & Drawer -->
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button onclick="toggleCart()" style="font-size: 1.2rem; color: var(--text-light);"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container"></div>
+        <div class="cart-footer">
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-name" class="form-control" placeholder="Your Name *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-phone" class="form-control" placeholder="Contact Number *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <textarea id="cart-address" class="form-control" placeholder="Delivery Address *" required style="padding: 0.6rem 1rem; font-size: 0.9rem; min-height: 60px;"></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <input type="text" id="cart-coupon" class="form-control" placeholder="Coupon Code (Optional)" style="padding: 0.6rem 1rem; font-size: 0.9rem; border: 1px dashed var(--primary-color);">
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 600; font-size: 1.1rem;">
+                <span>Total:</span>
+                <span id="cart-total-price">₹0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; border:none; cursor:pointer;" onclick="checkoutViaWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem; color:var(--primary-color);">MJC.</h2>
+            <button onclick="toggleMobileMenu()" style="font-size:1.5rem; color:var(--text-main);"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="offers.html">Offers</a>
+        <a href="booking.html">Book Table</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cart.js?v=3"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('dynamic-gallery-container');
+            if (container && typeof fetchReels === 'function') {
+                const galleryItems = await fetchReels();
+                if (!galleryItems || galleryItems.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; width:100%; color:var(--text-light);">No gallery images available.</p>';
+                    return;
+                }
+                let html = '';
+                galleryItems.forEach(item => {
+                    const isReel = item.type === 'Reel';
+                    const igLink = item.instagram_url || null;
+                    const tag = igLink ? 'a' : 'div';
+                    const attrs = igLink ? `href="${igLink}" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;color:inherit;"` : '';
+                    html += `
+                        <div class="masonry-item" style="${igLink ? 'cursor:pointer;' : ''}">
+                            <${tag} ${attrs}>
+                                <img src="${item.url}" loading="lazy" alt="${item.title}">
+                                <div class="masonry-overlay">
+                                    <h4>${item.title}</h4>
+                                    ${igLink ? `<span style="font-size:0.78rem;opacity:0.85;"><i class="fa-brands fa-instagram"></i> View on Instagram</span>` : ''}
+                                </div>
+                                ${isReel ? `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:rgba(255,255,255,0.22);backdrop-filter:blur(4px);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.3rem;pointer-events:none;"><i class="fa-brands fa-instagram"></i></div>` : ''}
+                            </${tag}>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            }
+        });
+    </script>
+</body>
+</html>

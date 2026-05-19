@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Menu | Mariam Juice Cafe & Dining</title>
+    <meta name="description" content="Explore our premium menu featuring fresh juices, shakes, coffee, and delicious meals at Mariam Juice Cafe & Dining.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .menu-header {
+            padding-top: 100px;
+            padding-bottom: 20px;
+            background: var(--surface-color);
+        }
+        
+        .search-bar {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .sticky-categories {
+            position: sticky;
+            top: 70px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            z-index: 99;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .sticky-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cat-chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .cat-chip.active, .cat-chip:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .menu-section {
+            padding: 3rem 0;
+        }
+
+        .menu-section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .food-unavailable {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .unavailable-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="Image.jpg" alt="MJC Logo" class="brand-logo"> MJC<span>.</span></a>
+            
+            <nav class="desktop-nav">
+                <a href="index.html">Home</a>
+                <a href="menu.html" style="color: var(--primary-color);">Menu</a>
+                <a href="booking.html">Book Table</a>
+                <a href="gallery.html">Gallery</a>
+                <button class="btn btn-primary" onclick="toggleCart()"><i class="fa-solid fa-bag-shopping"></i> Cart (0)</button>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Menu" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <section class="menu-header">
+            <div class="container">
+                <h1 class="section-title">Our Menu</h1>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="menu-search" placeholder="Search for dishes, juices, shakes...">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sticky Categories -->
+        <div class="sticky-categories">
+            <div class="container" style="display: flex; gap: 10px; width: 100%; overflow-x: auto;">
+                <button class="cat-chip active" data-cat="all">All</button>
+            </div>
+        </div>
+
+        <section class="container menu-section" id="menu-container">
+            <!-- Dynamic Menu content loaded via JS/Supabase -->
+            <div class="text-center">
+                <div class="skeleton" style="height: 200px; width: 100%; border-radius: 20px; margin-bottom: 2rem;"></div>
+                <div class="skeleton" style="height: 200px; width: 100%; border-radius: 20px;"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house nav-icon"></i>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="menu.html" class="nav-item active">
+            <i class="fa-solid fa-utensils nav-icon"></i>
+            <span class="nav-label">Menu</span>
+        </a>
+        <a href="booking.html" class="nav-item">
+            <i class="fa-regular fa-calendar-check nav-icon"></i>
+            <span class="nav-label">Book</span>
+        </a>
+        <a href="#" class="nav-item" onclick="toggleCart(); return false;">
+            <i class="fa-solid fa-bag-shopping nav-icon"></i>
+            <span class="nav-label">Cart</span>
+        </a>
+    </nav>
+
+    <!-- Cart Overlay & Drawer -->
+    <div class="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button onclick="toggleCart()" style="font-size: 1.2rem; color: var(--text-light);"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container"></div>
+        <div class="cart-footer">
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-name" class="form-control" placeholder="Your Name *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <input type="text" id="cart-phone" class="form-control" placeholder="Contact Number *" required style="padding: 0.6rem 1rem; font-size: 0.9rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+                <textarea id="cart-address" class="form-control" placeholder="Delivery Address *" required style="padding: 0.6rem 1rem; font-size: 0.9rem; min-height: 60px;"></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <input type="text" id="cart-coupon" class="form-control" placeholder="Coupon Code (Optional)" style="padding: 0.6rem 1rem; font-size: 0.9rem; border: 1px dashed var(--primary-color);">
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 600; font-size: 1.1rem;">
+                <span>Total:</span>
+                <span id="cart-total-price">₹0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; border:none; cursor:pointer;" onclick="checkoutViaWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem; color:var(--primary-color);">MJC.</h2>
+            <button onclick="toggleMobileMenu()" style="font-size:1.5rem; color:var(--text-main);"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="offers.html">Offers</a>
+        <a href="booking.html">Book Table</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cart.js?v=3"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>
